@@ -1,12 +1,14 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import Header from './index';
+import { findByTestAttribute} from '../../../utils/index'
 
 const setUp=(props={})=>{
     //this is called shallow rendering where you get the exact component
     const component=shallow(<Header {...props}/>); 
     return component;
 };
+
 
 describe("Header Component",()=>{
     let component;
@@ -15,13 +17,15 @@ describe("Header Component",()=>{
         component=setUp();
     });
 
-    it('A simple test example',()=>{
-        expect(1).toBe(1);
-        });
-
-    it('This method checks if class .headerComponent is used only in one element in <Header/>',()=>{
+    it('Check if headerComponent is used in one element only in <Header/> Component',()=>{
         //console.log(component.debug());
-        const wrapper=component.find('.headerComponent');
+        const wrapper=findByTestAttribute(component, "headerComponent");
         expect(wrapper.length).toBe(1);
         });
+
+    it('Check if logoIMG is used in one element only in <Header/> Component',()=>{
+            const wrapper=findByTestAttribute(component, "logoIMG");
+            expect(wrapper.length).toBe(1);
+            });
+        
 })
